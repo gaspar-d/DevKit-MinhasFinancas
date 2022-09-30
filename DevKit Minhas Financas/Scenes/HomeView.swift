@@ -54,19 +54,46 @@ final class HomeView: UIView {
 	
 	// MARK: - Button Components
 	
+	private lazy var buttonsAddContainerStack: UIStackView = {
+		let stack = UIStackView(arrangedSubviews: [addIncomeButton,
+												  addExpenseButton])
+		stack.translatesAutoresizingMaskIntoConstraints = false
+		stack.backgroundColor = .systemBackground
+		stack.axis = .horizontal
+		stack.distribution = .fillEqually
+		stack.spacing = 8
+		
+		return stack
+	}()
+	
 	private lazy var addIncomeButton: UIButton = {
 		var configuration = UIButton.Configuration.filled()
 		configuration.baseBackgroundColor = .systemGreen
-		configuration.baseForegroundColor = .label
+		configuration.baseForegroundColor = .systemBackground
 		configuration.buttonSize = .large
+		configuration.cornerStyle = .small
 		
 		var container = AttributeContainer()
 		
 		configuration.attributedTitle = AttributedString("Nova Receita", attributes: container)
 		
 		let button = UIButton(configuration: configuration)
-		button.translatesAutoresizingMaskIntoConstraints = false
 		
+		return button
+	}()
+	
+	private lazy var addExpenseButton: UIButton = {
+		var configuration = UIButton.Configuration.filled()
+		configuration.baseBackgroundColor = .systemRed
+		configuration.baseForegroundColor = .systemBackground
+		configuration.buttonSize = .large
+		configuration.cornerStyle = .small
+		
+		var container = AttributeContainer()
+		
+		configuration.attributedTitle = AttributedString("Nova Receita", attributes: container)
+		
+		let button = UIButton(configuration: configuration)
 		
 		return button
 	}()
@@ -89,11 +116,13 @@ extension HomeView: HomeViewProtocol {
 	
 }
 
+// MARK: - Constraints
+
 extension HomeView: ViewCode {
 	func setupComponents() {
 		addSubview(balanceContainerStack)
 		balanceContainerStack.addSubview(separatorLine)
-		addSubview(addIncomeButton)
+		addSubview(buttonsAddContainerStack)
 	}
 	
 	func setupConstraints() {
@@ -102,14 +131,24 @@ extension HomeView: ViewCode {
 		let screenBorderMargin: CGFloat = 16
 		
 		NSLayoutConstraint.activate([
-			separatorLine.widthAnchor.constraint(equalTo: balanceContainerStack.widthAnchor, multiplier: 0.8),
+			separatorLine.widthAnchor.constraint(equalTo: balanceContainerStack.widthAnchor,
+												 multiplier: 0.8),
 			separatorLine.heightAnchor.constraint(equalToConstant: 1),
 			
-			balanceContainerStack.centerYAnchor.constraint(equalTo: centerYAnchor),
-			balanceContainerStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: screenBorderMargin),
-			balanceContainerStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -screenBorderMargin),
+			balanceContainerStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
+													   constant: 20),
+			balanceContainerStack.leadingAnchor.constraint(equalTo: leadingAnchor,
+														   constant: screenBorderMargin),
+			balanceContainerStack.trailingAnchor.constraint(equalTo: trailingAnchor,
+															constant: -screenBorderMargin),
 			
-			addIncomeButton.topAnchor.constraint(equalTo: balanceContainerStack.bottomAnchor, constant: verticalPadding)
+			buttonsAddContainerStack.topAnchor.constraint(equalTo: balanceContainerStack.bottomAnchor,
+														  constant: verticalPadding),
+			buttonsAddContainerStack.leadingAnchor.constraint(equalTo: leadingAnchor,
+														   constant: screenBorderMargin),
+			buttonsAddContainerStack.trailingAnchor.constraint(equalTo: trailingAnchor,
+															constant: -screenBorderMargin),
+			
 		])
 	}
 	
