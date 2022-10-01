@@ -3,6 +3,7 @@ import UIKit
 final class NewExpenseController: UIViewController {
 	
 	private let customView: NewExpenseViewProtocol?
+	var coordinator: Coordinator?
 	
 	init(customView: NewExpenseViewProtocol = NewExpenseView()) {
 		self.customView = customView

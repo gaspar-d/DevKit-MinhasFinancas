@@ -2,10 +2,16 @@ import UIKit
 
 final class DefaultStackView: UIStackView {
 	
-	init(viewComponents: [UIView]) {
+	init(defaultContainer: [UIView]) {
 		super.init(frame: .zero)
 		
-		initDefaultContainer(stackComponents: viewComponents)
+		initDefaultContainer(stackComponents: defaultContainer)
+	}
+	
+	init(insideContainer: [UIView]) {
+		super.init(frame: .zero)
+		
+		initInsideContainer(stackComponents: insideContainer)
 	}
 	
 	init(buttonComponents: [UIView]) {
@@ -24,14 +30,6 @@ final class DefaultStackView: UIStackView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	private func initBasicStack(stackComponents: [UIView]) {
-		stackComponents.forEach { self.addArrangedSubview($0) }
-		self.translatesAutoresizingMaskIntoConstraints = false
-		self.axis = .horizontal
-		self.distribution = .equalSpacing
-		self.spacing = 0
-	}
-	
 	private func initDefaultContainer(stackComponents: [UIView]) {
 		stackComponents.forEach { self.addArrangedSubview($0) }
 		
@@ -39,9 +37,17 @@ final class DefaultStackView: UIStackView {
 		self.backgroundColor = .systemBackground
 		self.axis = .vertical
 		self.spacing = 10
-		self.layer.cornerRadius = 5
+		self.layer.cornerRadius = 10
 		self.isLayoutMarginsRelativeArrangement = true
 		self.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 12, leading: 18, bottom: 12, trailing: 18)
+	}
+	
+	private func initInsideContainer(stackComponents: [UIView]) {
+		stackComponents.forEach { self.addArrangedSubview($0) }
+		
+		self.translatesAutoresizingMaskIntoConstraints = false
+		self.axis = .vertical
+		self.spacing = 10
 	}
 	
 	private func initButtonContainer(stackComponents: [UIView]) {
@@ -52,5 +58,12 @@ final class DefaultStackView: UIStackView {
 		self.axis = .horizontal
 		self.distribution = .fillEqually
 		self.spacing = 8
+	}
+	
+	private func initBasicStack(stackComponents: [UIView]) {
+		stackComponents.forEach { self.addArrangedSubview($0) }
+		self.translatesAutoresizingMaskIntoConstraints = false
+		self.axis = .horizontal
+		self.distribution = .equalSpacing
 	}
 }

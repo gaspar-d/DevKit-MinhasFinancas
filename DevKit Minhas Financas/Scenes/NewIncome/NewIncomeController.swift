@@ -3,6 +3,7 @@ import UIKit
 final class NewIncomeController: UIViewController {
 	
 	private let customView: NewIncomeViewProtocol?
+	var coordinator: Coordinator?
 	
 	init(customView: NewIncomeViewProtocol = NewIncomeView()) {
 		self.customView = customView
