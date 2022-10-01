@@ -9,22 +9,11 @@ final class HomeView: UIView {
 	
 	// MARK: - Balance Components
 	
-	private lazy var balanceContainerStack: UIStackView = {
-		let stack = UIStackView(arrangedSubviews: [myBalanceLabel,
-												   inputTextField,
-												   bottomInputLine,
-												   lastTransitionLabel])
-		
-		stack.translatesAutoresizingMaskIntoConstraints = false
-		stack.backgroundColor = .systemBackground
-		stack.axis = .vertical
-		stack.spacing = 10
-		stack.layer.cornerRadius = 5
-		stack.isLayoutMarginsRelativeArrangement = true
-		stack.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 12, leading: 18, bottom: 12, trailing: 18)
-		
-		return stack
-	}()
+	private lazy var balanceContainerStack = DefaultStackView(viewComponents:
+																[myBalanceLabel,
+																 inputTextField,
+																 bottomInputLine,
+																 transitionBottonContainer])
 	
 	private lazy var myBalanceLabel: UILabel = {
 		let label = UILabel()
@@ -51,77 +40,49 @@ final class HomeView: UIView {
 		return view
 	}()
 	
+	private lazy var transitionBottonContainer = DefaultStackView(basicStack: [lastTransitionLabel,
+																			   lastTransitionTime])
+	
 	private lazy var lastTransitionLabel: UILabel = {
 		let label = UILabel()
-		label.text = "Última atualização                09:41"
+		label.text = "Última atualização"
 		label.textColor  = .secondaryLabel
 		label.font = .systemFont(ofSize: 12, weight: .regular)
 		
+		return label
+	}()
+	
+	private lazy var lastTransitionTime: UILabel = {
+		let label = UILabel()
+		label.text = "09:41"
+		label.textColor  = .secondaryLabel
+		label.font = .systemFont(ofSize: 12, weight: .regular)
 		
 		return label
 	}()
 	
 	// MARK: - Button Components
 	
-	private lazy var buttonsAddContainerStack: UIStackView = {
-		let stack = UIStackView(arrangedSubviews: [addIncomeButton,
-												  addExpenseButton])
-		stack.translatesAutoresizingMaskIntoConstraints = false
-		stack.backgroundColor = .systemBackground
-		stack.axis = .horizontal
-		stack.distribution = .fillEqually
-		stack.spacing = 8
-		
-		return stack
-	}()
+	private lazy var buttonsAddContainerStack = DefaultStackView(buttonComponents:
+																	[addIncomeButton,
+																	 addExpenseButton])
 	
-	private lazy var addIncomeButton: UIButton = {
-		var configuration = UIButton.Configuration.filled()
-		configuration.baseBackgroundColor = .systemGreen
-		configuration.baseForegroundColor = .systemBackground
-		configuration.buttonSize = .large
-		configuration.cornerStyle = .small
-		
-		var container = AttributeContainer()
-		configuration.attributedTitle = AttributedString("Nova Receita", attributes: container)
-		let button = UIButton(configuration: configuration)
-		
-		return button
-	}()
+	private lazy var addIncomeButton = DefaultButton(title: "NOVA RECEITA",
+													 icon: "plus",
+													 color: .systemGreen)
 	
-	private lazy var addExpenseButton: UIButton = {
-		var configuration = UIButton.Configuration.filled()
-		configuration.baseBackgroundColor = .systemRed
-		configuration.baseForegroundColor = .systemBackground
-		configuration.buttonSize = .large
-		configuration.cornerStyle = .small
-		
-		var container = AttributeContainer()
-		configuration.attributedTitle = AttributedString("Nova Receita", attributes: container)
-		let button = UIButton(configuration: configuration)
-		
-		return button
-	}()
+	private lazy var addExpenseButton = DefaultButton(title: "NOVA DESPESA",
+													  icon: "minus",
+													  color: .systemRed)
 	
 	// MARK: - Budget Components
 	
-	private lazy var budgetContainerStack: UIStackView = {
-		let stack = UIStackView(arrangedSubviews: [budgetTitleLabel,
-												   addNewItemButton,
-												   titleUnderLine,
-												   separatorLineOne,
-												   separatorLineTwo])
-		
-		stack.translatesAutoresizingMaskIntoConstraints = false
-		stack.backgroundColor = .systemBackground
-		stack.axis = .vertical
-		stack.spacing = 10
-		stack.layer.cornerRadius = 5
-		stack.isLayoutMarginsRelativeArrangement = true
-		stack.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 12, leading: 18, bottom: 12, trailing: 18)
-		
-		return stack
-	}()
+	private lazy var budgetContainerStack = DefaultStackView(viewComponents: [budgetTitleContainer,
+																			  titleUnderLine,
+																			  separatorLineOne,
+																			  separatorLineTwo])
+	
+	private lazy var budgetTitleContainer = DefaultStackView(basicStack: [budgetTitleLabel, addNewItemButton])
 	
 	private lazy var budgetTitleLabel: UILabel = {
 		let label = UILabel()
@@ -133,16 +94,12 @@ final class HomeView: UIView {
 	}()
 	
 	private lazy var addNewItemButton: UIButton = {
-		var configuration = UIButton.Configuration.filled()
-		configuration.baseBackgroundColor = .systemRed
-		configuration.baseForegroundColor = .systemBackground
-		configuration.buttonSize = .large
-		configuration.cornerStyle = .small
-		configuration.image = UIImage(systemName: "plus")
+		var symbol = UIImage.SymbolConfiguration(weight: .bold)
+		var imageIcon = UIImage(systemName: "plus", withConfiguration: symbol)
 		
-		var container = AttributeContainer()
-		configuration.attributedTitle = AttributedString("Nova Receita", attributes: container)
-		let button = UIButton(configuration: configuration)
+		let button = UIButton()
+		button.setImage(imageIcon, for: .normal)
+		button.tintColor = .secondaryLabel
 		
 		return button
 	}()
@@ -167,7 +124,6 @@ final class HomeView: UIView {
 		
 		return view
 	}()
-	
 	
 	override init(frame: CGRect) {
 		super.init(frame: .zero)
@@ -217,14 +173,13 @@ extension HomeView: ViewCode {
 			buttonsAddContainerStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: screenBorderMargin),
 			buttonsAddContainerStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -screenBorderMargin),
 			
-			budgetContainerStack.topAnchor.constraint(equalTo: buttonsAddContainerStack.bottomAnchor, constant: 20),
+			budgetContainerStack.topAnchor.constraint(equalTo: buttonsAddContainerStack.bottomAnchor, constant: verticalPadding),
 			budgetContainerStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: screenBorderMargin),
 			budgetContainerStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -screenBorderMargin),
 			
 			titleUnderLine.heightAnchor.constraint(equalToConstant: 3),
 			separatorLineOne.heightAnchor.constraint(equalToConstant: 1),
 			separatorLineTwo.heightAnchor.constraint(equalToConstant: 1),
-			
 		])
 	}
 	
