@@ -7,8 +7,6 @@ protocol HomeCoordinatorProtocol: AnyObject {
 
 final class HomeCoordinator: Coordinator {
 	var navigation: UINavigationController
-	let expenseVC = NewExpenseController()
-	let incomeVC = NewIncomeController()
 	
 	init(navigation: UINavigationController) {
 		self.navigation = navigation
@@ -24,13 +22,17 @@ final class HomeCoordinator: Coordinator {
 extension HomeCoordinator: HomeCoordinatorProtocol {
 	
 	func navigateToExpenseView() {
+		let expenseVC = NewExpenseController()
+		let navBar = UINavigationController(rootViewController: expenseVC)
 		expenseVC.coordinator = self
-		navigation.present(expenseVC, animated: true)
+		navigation.present(navBar, animated: true)
 	}
 	
 	func navigateToIncomeView() {
+		let incomeVC = NewIncomeController()
+		let navBar = UINavigationController(rootViewController: incomeVC)
 		incomeVC.coordinator = self
-		navigation.present(incomeVC, animated: true)
+		navigation.present(navBar, animated: true)
 	}
 }
 

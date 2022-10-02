@@ -2,18 +2,22 @@ import UIKit
 
 final class DefaultLabel: UILabel {
 	
-	init() {
+	init(withText text: String,
+		 withColor color: UIColor = .ColorAssets.primaryColor,
+		 withFontSize fontSize: CGFloat = 12,
+		 withFontWeight fontWeight: UIFont.Weight = .bold)
+	{
 		super.init(frame: .zero)
-		
+		createLabel(text: text, color: color, fontSize: fontSize, fontWeight: fontWeight)
 	}
 	
 	required init?(coder: NSCoder) {
-		fatalError("Can't find storyboard")
+		fatalError("init(coder:) has not been implemented")
 	}
 	
-	private func initLabel() {
+	private func createLabel(text: String, color: UIColor, fontSize: CGFloat, fontWeight: UIFont.Weight) {
 		self.text = text
-		self.textColor = color
-		self.font = .systemFont(ofSize: <#T##CGFloat#>, weight: <#T##UIFont.Weight#>)
+		self.textColor  = color
+		self.font = .systemFont(ofSize: fontSize, weight: fontWeight)
 	}
 }

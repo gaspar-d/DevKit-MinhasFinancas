@@ -2,10 +2,10 @@ import UIKit
 
 final class DefaultStackView: UIStackView {
 	
-	init(defaultContainer: [UIView]) {
+	init(defaultContainer: [UIView], withColor color: UIColor = .systemBackground) {
 		super.init(frame: .zero)
 		
-		initDefaultContainer(stackComponents: defaultContainer)
+		initDefaultContainer(stackComponents: defaultContainer, color: color)
 	}
 	
 	init(insideContainer: [UIView]) {
@@ -30,11 +30,11 @@ final class DefaultStackView: UIStackView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	private func initDefaultContainer(stackComponents: [UIView]) {
+	private func initDefaultContainer(stackComponents: [UIView], color: UIColor) {
 		stackComponents.forEach { self.addArrangedSubview($0) }
 		
 		self.translatesAutoresizingMaskIntoConstraints = false
-		self.backgroundColor = .systemBackground
+		self.backgroundColor = color
 		self.axis = .vertical
 		self.spacing = 10
 		self.layer.cornerRadius = 10

@@ -3,256 +3,89 @@ import UIKit
 protocol HomeViewProtocol: AnyObject {
 	func setAddIncomeButtonAction(target: HomeController?, action: Selector)
 	func setAddExpenseButtonAction(target: HomeController?, action: Selector)
+	func setLastTransaction(withHour hour: String)
 }
 
 final class HomeView: UIView {
 	
 	// MARK: - Balance Components
 	
-	private lazy var myBalanceLabel: UILabel = {
-		let label = UILabel()
-		label.text = "Meu Saldo"
-		label.textColor  = .secondaryLabel
-		label.font = .systemFont(ofSize: 12, weight: .bold)
-		return label
-	}()
-	
-	private lazy var inputTextField: UITextField = {
-		let text = UITextField()
-		text.placeholder = "R$  0,00"
-		text.textColor  = .label
-		text.font = .systemFont(ofSize: 32, weight: .bold)
-		return text
-	}()
-	
-	private lazy var bottomInputLine: UIView = {
-		let view = UIView()
-		view.backgroundColor = .systemIndigo
+	private lazy var containerScroll: UIScrollView = {
+		let view = UIScrollView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		
 		return view
 	}()
 	
-	private lazy var lastTransactionLabel: UILabel = {
-		let label = UILabel()
-		label.text = "Última atualização"
-		label.textColor  = .secondaryLabel
-		label.font = .systemFont(ofSize: 12, weight: .regular)
-		
-		return label
-	}()
-	
-	private lazy var lastTransactionTime: UILabel = {
-		let label = UILabel()
-		label.text = "09:41"
-		label.textColor  = .secondaryLabel
-		label.font = .systemFont(ofSize: 12, weight: .regular)
-		
-		return label
-	}()
-	
-	private lazy var balanceBottonContainer = DefaultStackView(basicStack: [lastTransactionLabel,
-																			lastTransactionTime])
-	
+	private lazy var myBalanceLabel = DefaultLabel(withText: "Meu Saldo", withColor: .ColorAssets.secondaryColor)
+	private lazy var inputTextField = DefaultTextField(withNumericPlaceholder: "R$ 0,00")
+	private lazy var bottomInputLine = SeparatorLine(withColor: .ColorAssets.customBlueLine)
+	private lazy var lastTransactionLabel = DefaultLabel(withText: "Última atualização", withColor: .ColorAssets.secondaryColor, withFontWeight: .regular)
+	private lazy var lastTransactionTime = DefaultLabel(withText: "09:41", withColor: .ColorAssets.secondaryColor, withFontWeight: .regular)
+	private lazy var balanceBottonContainer = DefaultStackView(basicStack: [lastTransactionLabel, lastTransactionTime])
 	private lazy var balanceContainerStack = DefaultStackView(defaultContainer:
 																[myBalanceLabel,
 																 inputTextField,
 																 bottomInputLine,
 																 balanceBottonContainer])
 	
+	
 	// MARK: - Button Components
 	
-	private lazy var addIncomeButton = DefaultButton(title: "NOVA RECEITA",
-													 icon: "plus",
-													 color: .systemGreen)
-	
-	private lazy var addExpenseButton = DefaultButton(title: "NOVA DESPESA",
-													  icon: "minus",
-													  color: .systemRed)
-	
+	private lazy var addIncomeButton = DefaultButton(withTitle: "NOVA RECEITA", withIcon: "plus", withColor: .ColorAssets.customGreen)
+	private lazy var addExpenseButton = DefaultButton(withTitle: "NOVA DESPESA", withIcon: "minus", withColor: .ColorAssets.customRed)
 	private lazy var buttonsAddContainerStack = DefaultStackView(buttonComponents:
 																	[addIncomeButton,
 																	 addExpenseButton])
 	
+	
 	// MARK: - Budget Components -> Title Block
 	
-	private lazy var budgetTitleLabel: UILabel = {
-		let label = UILabel()
-		label.text = "Orçamento"
-		label.textColor  = .label
-		label.font = .systemFont(ofSize: 22, weight: .bold)
-		return label
-	}()
-	
-	private lazy var addNewItemButton: UIButton = {
-		var symbol = UIImage.SymbolConfiguration(weight: .bold)
-		var imageIcon = UIImage(systemName: "plus", withConfiguration: symbol)
-		
-		let button = UIButton()
-		button.setImage(imageIcon, for: .normal)
-		button.tintColor = .secondaryLabel
-		
-		return button
-	}()
-	
+	private lazy var budgetTitleLabel = DefaultLabel(withText: "Orçamento", withFontSize: 22)
+	private lazy var addNewItemButton = DefaultButton(withIcon: "plus")
 	private lazy var budgetTitleContainer = DefaultStackView(basicStack: [budgetTitleLabel, addNewItemButton])
+	private lazy var titleUnderLine = SeparatorLine(withColor: .ColorAssets.bgColor)
 	
-	private lazy var titleUnderLine: UIView = {
-		let view = UIView()
-		view.backgroundColor = .secondarySystemBackground
-		
-		return view
-	}()
 	
 	// MARK: - New Car Block
 	
-	private lazy var newCarLabel: UILabel = {
-		let label = UILabel()
-		label.text = "Novo Carro"
-		label.textColor  = .label
-		label.font = .systemFont(ofSize: 16, weight: .bold)
-		
-		return label
-	}()
-	
-	private lazy var carCompletionBar: UIView = {
-		let view = UIView()
-		view.backgroundColor = .systemIndigo
-		view.layer.cornerRadius = 3
-		
-		return view
-	}()
-	
-	private lazy var currentValueLabel: UILabel = {
-		let label = UILabel()
-		label.text = "R$ 2.000,00"
-		label.textColor  = .systemRed
-		label.font = .systemFont(ofSize: 12, weight: .bold)
-		
-		return label
-	}()
-	
-	private lazy var totalValueLabel: UILabel = {
-		let label = UILabel()
-		label.text = "R$ 80.000,00"
-		label.textColor  = UIColor.init(red: 77/255, green: 92/255, blue: 228/255, alpha: 1)
-		label.font = .systemFont(ofSize: 12, weight: .bold)
-		
-		return label
-	}()
-	
-	private lazy var separatorLineOne: UIView = {
-		let view = UIView()
-		view.backgroundColor = .secondarySystemBackground
-		
-		return view
-	}()
-	
-	private lazy var newCarBottonContainer = DefaultStackView(basicStack: [currentValueLabel,
-																		   totalValueLabel])
-	
+	private lazy var newCarLabel = DefaultLabel(withText: "Novo Carro", withFontSize: 16)
+	private lazy var carCompletionBar = DefaultProgressBar(withProgress: 0.4)
+	private lazy var currentValueLabel = DefaultLabel(withText: "R$ 2.000,00", withColor: .ColorAssets.customRed)
+	private lazy var totalValueLabel = DefaultLabel(withText: "R$ 80.000,00", withColor: .ColorAssets.numberBlueAccentColor)
+	private lazy var separatorLineOne = SeparatorLine(withColor: .ColorAssets.bgColor)
+	private lazy var newCarBottonContainer = DefaultStackView(basicStack: [currentValueLabel, totalValueLabel])
 	private lazy var newCarContainerStack = DefaultStackView(insideContainer:
 																[newCarLabel,
 																 carCompletionBar,
 																 newCarBottonContainer])
 	
+	
 	// MARK: - TV Block
 	
-	private lazy var newTvLabel: UILabel = {
-		let label = UILabel()
-		label.text = "TV"
-		label.textColor  = .label
-		label.font = .systemFont(ofSize: 16, weight: .bold)
-		
-		return label
-	}()
-	
-	private lazy var tvCompletionBar: UIView = {
-		let view = UIView()
-		view.backgroundColor = .systemIndigo
-		view.layer.cornerRadius = 3
-		
-		return view
-	}()
-	
-	private lazy var tvCurrentValueLabel: UILabel = {
-		let label = UILabel()
-		label.text = "R$ 3.000,00"
-		label.textColor  = .systemRed
-		label.font = .systemFont(ofSize: 12, weight: .bold)
-		
-		return label
-	}()
-	
-	private lazy var tvTotalValueLabel: UILabel = {
-		let label = UILabel()
-		label.text = "R$ 3.500,00"
-		label.textColor  = UIColor.init(red: 77/255, green: 92/255, blue: 228/255, alpha: 1)
-		label.font = .systemFont(ofSize: 12, weight: .bold)
-		
-		return label
-	}()
-	
-	private lazy var newTvBottonContainer = DefaultStackView(basicStack: [tvCurrentValueLabel,
-																		  tvTotalValueLabel])
-	
+	private lazy var newTvLabel = DefaultLabel(withText: "TV", withFontSize: 16)
+	private lazy var tvCompletionBar = DefaultProgressBar(withProgress: 0.95)
+	private lazy var tvCurrentValueLabel = DefaultLabel(withText: "R$ 3.000,00", withColor: .ColorAssets.customRed)
+	private lazy var tvTotalValueLabel = DefaultLabel(withText: "R$ 3.500,00", withColor: .ColorAssets.numberBlueAccentColor)
+	private lazy var newTvBottonContainer = DefaultStackView(basicStack: [tvCurrentValueLabel, tvTotalValueLabel])
 	private lazy var newTvContainerStack = DefaultStackView(insideContainer:
 																[newTvLabel,
 																 tvCompletionBar,
 																 newTvBottonContainer])
+	private lazy var separatorLineTwo = SeparatorLine(withColor: .ColorAssets.bgColor)
 	
-	
-	
-	private lazy var separatorLineTwo: UIView = {
-		let view = UIView()
-		view.backgroundColor = .secondarySystemBackground
-		
-		return view
-	}()
 	
 	// MARK: - Maldivas Vacancy
 	
-	private lazy var vacancyLabel: UILabel = {
-		let label = UILabel()
-		label.text = "Férias nas Maldivas"
-		label.textColor  = .label
-		label.font = .systemFont(ofSize: 16, weight: .bold)
-		
-		return label
-	}()
-	
-	private lazy var vacancyCompletionBar: UIView = {
-		let view = UIView()
-		view.backgroundColor = .systemIndigo
-		view.layer.cornerRadius = 3
-		
-		return view
-	}()
-	
-	private lazy var vacancyCurrentValueLabel: UILabel = {
-		let label = UILabel()
-		label.text = "R$ 1,50"
-		label.textColor  = .systemRed
-		label.font = .systemFont(ofSize: 12, weight: .bold)
-		
-		return label
-	}()
-	
-	private lazy var vacancyTotalValueLabel: UILabel = {
-		let label = UILabel()
-		label.text = "R$ 200.000,00"
-		label.textColor  = UIColor.init(red: 77/255, green: 92/255, blue: 228/255, alpha: 1)
-		label.font = .systemFont(ofSize: 12, weight: .bold)
-		
-		return label
-	}()
-	
-	private lazy var vacancyBottonContainer = DefaultStackView(basicStack: [vacancyCurrentValueLabel,
-																			vacancyTotalValueLabel])
-	
+	private lazy var vacancyLabel = DefaultLabel(withText: "Férias nas Maldivas", withFontSize: 16)
+	private lazy var vacancyCompletionBar = DefaultProgressBar(withProgress: 0.01)
+	private lazy var vacancyCurrentValueLabel = DefaultLabel(withText: "R$ 1,50", withColor: .ColorAssets.customRed)
+	private lazy var vacancyTotalValueLabel = DefaultLabel(withText: "R$ 200.000,00", withColor: .ColorAssets.numberBlueAccentColor)
+	private lazy var vacancyBottonContainer = DefaultStackView(basicStack: [vacancyCurrentValueLabel, vacancyTotalValueLabel])
 	private lazy var vacancyContainerStack = DefaultStackView(insideContainer:
 																[vacancyLabel,
 																 vacancyCompletionBar,
 																 vacancyBottonContainer])
-	
 	private lazy var budgetContainerStack = DefaultStackView(defaultContainer:
 																[budgetTitleContainer,
 																 titleUnderLine,
@@ -261,6 +94,7 @@ final class HomeView: UIView {
 																 newTvContainerStack,
 																 separatorLineTwo,
 																 vacancyContainerStack])
+	
 	
 	// MARK: - Suggestion Block
 	
@@ -274,39 +108,25 @@ final class HomeView: UIView {
 		
 		label.textColor  = .label
 		label.textAlignment = .center
-		label.textColor = UIColor.init(red: 77/255, green: 92/255, blue: 228/255, alpha: 1)
+		label.textColor = .ColorAssets.textBlueAccentColor
 		label.font = .systemFont(ofSize: 16, weight: .bold)
 		label.attributedText = fullLabel
-		
 		return label
 	}()
 	
 	private lazy var suggestionText: UILabel = {
 		let label = UILabel()
 		label.text = "Crie seu orçamento para facilitar a visualização das metas"
-		label.textColor  = .secondaryLabel
+		label.textColor  = .ColorAssets.tertiaryColor
 		label.textAlignment = .center
 		label.numberOfLines = 0
 		label.font = .systemFont(ofSize: 16, weight: .bold)
-		
 		return label
 	}()
 	
-	//		private lazy var suggestionContainerStack = DefaultStackView(defaultContainer: [suggestionLabel, suggestionText])
-	
-	private lazy var suggestionContainerStack: UIStackView = {
-		let stack = UIStackView(arrangedSubviews: [suggestionLabel, suggestionText])
-		stack.translatesAutoresizingMaskIntoConstraints = false
-		stack.backgroundColor = UIColor.init(red: 77/255, green: 92/255, blue: 228/255, alpha: 0.1)
-		stack.axis = .vertical
-		stack.spacing = 10
-		stack.alignment = .center
-		stack.layer.cornerRadius = 10
-		stack.isLayoutMarginsRelativeArrangement = true
-		stack.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 22, leading: 18, bottom: 22, trailing: 18)
-		
-		return stack
-	}()
+	private lazy var suggestionContainerStack = DefaultStackView(
+		defaultContainer: [suggestionLabel, suggestionText],
+		withColor: .ColorAssets.bgAccentColor)
 	
 	// MARK: - Initializers
 	
@@ -332,6 +152,10 @@ extension HomeView: HomeViewProtocol {
 	func setAddExpenseButtonAction(target: HomeController?, action: Selector) {
 		addExpenseButton.addTarget(target, action: action, for: .touchUpInside)
 	}
+	
+	func setLastTransaction(withHour hour: String) {
+		lastTransactionTime.text = hour
+	}
 }
 
 // MARK: - Constraints
@@ -347,13 +171,18 @@ extension HomeView: ViewCode {
 	func setupConstraints() {
 		let verticalPadding: CGFloat = 12
 		let screenBorderMargin: CGFloat = 16
+		let completionBarHeight: CGFloat = 6
+		let separatorLineHeight: CGFloat = 1
 		
 		NSLayoutConstraint.activate([
 			balanceContainerStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
 			balanceContainerStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: screenBorderMargin),
 			balanceContainerStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -screenBorderMargin),
 			
-			bottomInputLine.heightAnchor.constraint(equalToConstant: 1),
+			titleUnderLine.heightAnchor.constraint(equalToConstant: 3),
+			bottomInputLine.heightAnchor.constraint(equalToConstant: separatorLineHeight),
+			separatorLineOne.heightAnchor.constraint(equalToConstant: separatorLineHeight),
+			separatorLineTwo.heightAnchor.constraint(equalToConstant: separatorLineHeight),
 			
 			buttonsAddContainerStack.topAnchor.constraint(equalTo: balanceContainerStack.bottomAnchor, constant: verticalPadding),
 			buttonsAddContainerStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: screenBorderMargin),
@@ -363,21 +192,18 @@ extension HomeView: ViewCode {
 			budgetContainerStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: screenBorderMargin),
 			budgetContainerStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -screenBorderMargin),
 			
-			titleUnderLine.heightAnchor.constraint(equalToConstant: 3),
-			carCompletionBar.heightAnchor.constraint(equalToConstant: 6),
-			tvCompletionBar.heightAnchor.constraint(equalToConstant: 6),
-			vacancyCompletionBar.heightAnchor.constraint(equalToConstant: 6),
-			separatorLineOne.heightAnchor.constraint(equalToConstant: 1),
-			separatorLineTwo.heightAnchor.constraint(equalToConstant: 1),
+			carCompletionBar.heightAnchor.constraint(equalToConstant: completionBarHeight),
+			tvCompletionBar.heightAnchor.constraint(equalToConstant: completionBarHeight),
+			vacancyCompletionBar.heightAnchor.constraint(equalToConstant: completionBarHeight),
+			
 			
 			suggestionContainerStack.topAnchor.constraint(equalTo: budgetContainerStack.bottomAnchor, constant: 36),
 			suggestionContainerStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: screenBorderMargin),
 			suggestionContainerStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -screenBorderMargin),
-			//			suggestionContainerStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: screenBorderMargin),
 		])
 	}
 	
 	func setupExtraConfiguration() {
-		backgroundColor = .secondarySystemBackground
+		backgroundColor = .ColorAssets.bgColor
 	}
 }

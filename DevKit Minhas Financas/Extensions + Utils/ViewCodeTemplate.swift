@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 protocol ViewCode {
 	func setup()
@@ -16,3 +16,4 @@ extension ViewCode {
 	
 	func setupExtraConfiguration() {}
 }
+
