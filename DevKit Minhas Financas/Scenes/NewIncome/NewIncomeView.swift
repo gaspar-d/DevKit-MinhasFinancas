@@ -3,13 +3,43 @@ import UIKit
 protocol NewIncomeViewProtocol: AnyObject {
 	var getNameText: String? { get }
 	var getValueText: String? { get }
+	func setPickerDelegateAndSource(delegate: UIPickerViewDelegate, datasource: UIPickerViewDataSource)
+	func setCategory(item: String)
 }
 
 final class NewIncomeView: UIView {
 	
-	var nameTextField = DefaultTextField(withPlaceholder: "Nome")
-	var valueTextField = DefaultTextField(withPlaceholder: "Valor", keyboardType: .numberPad)
-	var categoryTextField = DefaultTextField(withPlaceholder: "Categoria")
+	// MARK: - Components
+	
+	private lazy var nameTextField = DefaultTextField(withPlaceholder: "Nome")
+	private lazy var valueTextField = DefaultTextField(withPlaceholder: "Valor", keyboardType: .numberPad)
+	private lazy var categoryTextField = DefaultTextField(withPlaceholder: "Categoria")
+	
+	// TODO: - Need to consolidate this new code
+	private lazy var categoryPicker: UIPickerView = {
+		let view = UIPickerView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.backgroundColor = .ColorAssets.bgAccentColor
+		return view
+	}()
+	
+	private lazy var toolBar: UIToolbar = {
+		let doneButton = UIBarButtonItem(title: "Ok", style: .done, target: self, action: #selector(self.okPicker))
+		let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+		let cancelButton = UIBarButtonItem(title: "Sair", style: .plain, target: self, action: #selector(self.dismissPicker))
+		
+		let toolBar = UIToolbar()
+		toolBar.translatesAutoresizingMaskIntoConstraints = false
+//		toolBar.isTranslucent = true
+		toolBar.tintColor = .ColorAssets.customBlueLine
+		toolBar.sizeToFit()
+		toolBar.setItems([doneButton, spaceButton, cancelButton], animated: false)
+		toolBar.isUserInteractionEnabled = true
+		return toolBar
+	}()
+	
+	
+	// MARK: - Initializers
 	
 	override init(frame: CGRect) {
 		super.init(frame: .zero)
@@ -19,7 +49,19 @@ final class NewIncomeView: UIView {
 	required init?(coder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+	
+	@objc func okPicker() {
+		categoryTextField.resignFirstResponder()
+	}
+	
+	@objc func dismissPicker() {
+		categoryTextField.text = ""
+		categoryTextField.resignFirstResponder()
+	}
 }
+
+
+// MARK: -  extensions
 
 extension NewIncomeView: NewIncomeViewProtocol {
 	var getNameText: String? {
@@ -29,6 +71,15 @@ extension NewIncomeView: NewIncomeViewProtocol {
 	var getValueText: String? {
 		valueTextField.text
 	}
+	
+	func setPickerDelegateAndSource(delegate: UIPickerViewDelegate, datasource: UIPickerViewDataSource) {
+		categoryPicker.delegate = delegate
+		categoryPicker.dataSource = datasource
+	}
+	
+	func setCategory(item: String) {
+		categoryTextField.text = item
+	}
 }
 
 extension NewIncomeView: ViewCode {
@@ -37,6 +88,8 @@ extension NewIncomeView: ViewCode {
 		addSubview(nameTextField)
 		addSubview(valueTextField)
 		addSubview(categoryTextField)
+		categoryTextField.inputView = categoryPicker
+		categoryTextField.inputAccessoryView = toolBar
 	}
 	
 	func setupConstraints() {
@@ -60,5 +113,4 @@ extension NewIncomeView: ViewCode {
 			component.heightAnchor.constraint(equalToConstant: textFieldHeight),
 		])
 	}
-	
 }

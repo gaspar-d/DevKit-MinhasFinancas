@@ -1,7 +1,8 @@
 import UIKit
 
 final class NewIncomeController: UIViewController {
-	
+
+	let categoryItems = ["Novo Carro", "TV", "Férias nas Maldivas", "Nenhum"]
 	private let customView: NewIncomeViewProtocol?
 	private let validator: ValidatorProtocol
 	private let alert: AlertsProtocol
@@ -27,6 +28,9 @@ final class NewIncomeController: UIViewController {
 		setupNavigationBarAppearance()
 		setupRightBarButton()
 		setupLeftBarButton()
+		
+		customView?.setPickerDelegateAndSource(delegate: self,
+											   datasource: self)
 	}
 	
 	private func setupView() {
@@ -79,5 +83,23 @@ final class NewIncomeController: UIViewController {
 						message: "Por favor preencher todos os campos",
 						controller: self)
 		}
+	}
+}
+
+extension NewIncomeController: UIPickerViewDelegate, UIPickerViewDataSource {
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+		return 1
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+		return categoryItems.count
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+		return categoryItems[row]
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		customView?.setCategory(item: categoryItems[row])
 	}
 }
