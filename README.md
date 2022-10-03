@@ -7,8 +7,9 @@
 
 ## Tables
 
+| Demo												      |
 | :---:                                                   |
-| <img src="https://github.com/gaspar-d/DevKit-MinhasFinancas/blob/main/DevKit-Minhas-Financas/Resources/Images/Devi-kit-Minhas-Financas.gif?raw=true" width="50%" /> |   
+| <img src="https://github.com/gaspar-d/DevKit-MinhasFinancas/blob/main/DevKit-Minhas-Financas/Resources/Images/Devi-kit-Minhas-Financas.gif" width="50%" /> |   
 
 
 ## Images
