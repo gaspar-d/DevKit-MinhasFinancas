@@ -199,6 +199,7 @@
 		EBD1773828E7606F000C19A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EBD1778028EB32AB000C19A6 /* Home.png */,
 				EBD1777D28EB3272000C19A6 /* Images */,
 				EBD1777228EAA584000C19A6 /* Fonts */,
 				EBD1771028E75D34000C19A6 /* Assets.xcassets */,
@@ -308,7 +309,6 @@
 			children = (
 				EBD1777F28EB32AB000C19A6 /* Devi-kit-Minhas-Financas.gif */,
 				EBD1777E28EB32AB000C19A6 /* Expenses.png */,
-				EBD1778028EB32AB000C19A6 /* Home.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";

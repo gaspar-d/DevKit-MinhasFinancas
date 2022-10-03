@@ -15,7 +15,7 @@
 ## Images
 
 <p float="left" align="center" />
-<img src="https://github.com/gaspar-d/DevKit-MinhasFinancas/blob/main/DevKit-MinhasFinancas/Resources/Images/Home.png" width="50%" />
+<img src="https://github.com/gaspar-d/DevKit-MinhasFinancas/blob/main/DevKit-MinhasFinancas/Resources/Home.png" width="50%" />
 <img src="https://github.com/gaspar-d/DevKit-MinhasFinancas/Resources/Images/Expenses.png" width="50%" />
 <img src=:"https://urltoimage.gif" width="33%" />
 <p/>
