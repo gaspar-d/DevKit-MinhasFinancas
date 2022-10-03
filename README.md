@@ -10,6 +10,7 @@
 | :---:                                                   |
 | <img src="https://github.com/gaspar-d/DevKit-MinhasFinancas/blob/main/DevKit-Minhas-Financas/Resources/Images/Devi-kit-Minhas-Financas.gif" width="50%" /> |   
 
+# So pra testar
 
 ## Images
 
