@@ -13,9 +13,9 @@
 
 ## Images
 
-<p float="left" align="center" />
-<img src="https://github.com/gaspar-d/DevKit-MinhasFinancas/tree/main/Challenge/Resources/Images/Home.png" width="50%" />
-<img src="https://github.com/gaspar-d/DevKit-MinhasFinancas/tree/main/Challenge/Resources/Images/Expenses.png" width="50%" />
-<img src=:"https://urltoimage.gif" width="33%" />
-<p/>
+<!--<p float="left" align="center" />-->
+<!--<img src="https://github.com/gaspar-d/DevKit-MinhasFinancas/tree/main/Challenge/Resources/Images/Home.png" width="50%" />-->
+<!--<img src="https://github.com/gaspar-d/DevKit-MinhasFinancas/tree/main/Challenge/Resources/Images/Expenses.png" width="50%" />-->
+<!--<img src=:"https://urltoimage.gif" width="33%" />-->
+<!--<p/>-->
 
