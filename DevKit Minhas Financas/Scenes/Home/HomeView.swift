@@ -11,9 +11,10 @@ final class HomeView: UIView {
 	// MARK: - Balance Components
 	
 	private lazy var containerScroll: UIScrollView = {
-		let view = UIScrollView()
+		let view = UIScrollView(frame: .zero)
 		view.translatesAutoresizingMaskIntoConstraints = false
-		
+		view.showsVerticalScrollIndicator = false
+
 		return view
 	}()
 	
@@ -67,12 +68,12 @@ final class HomeView: UIView {
 	private lazy var tvCompletionBar = DefaultProgressBar(withProgress: 0.95)
 	private lazy var tvCurrentValueLabel = DefaultLabel(withText: "R$ 3.000,00", withColor: .ColorAssets.customRed)
 	private lazy var tvTotalValueLabel = DefaultLabel(withText: "R$ 3.500,00", withColor: .ColorAssets.numberBlueAccentColor)
+	private lazy var separatorLineTwo = SeparatorLine(withColor: .ColorAssets.bgColor)
 	private lazy var newTvBottonContainer = DefaultStackView(basicStack: [tvCurrentValueLabel, tvTotalValueLabel])
 	private lazy var newTvContainerStack = DefaultStackView(insideContainer:
 																[newTvLabel,
 																 tvCompletionBar,
 																 newTvBottonContainer])
-	private lazy var separatorLineTwo = SeparatorLine(withColor: .ColorAssets.bgColor)
 	
 	
 	// MARK: - Maldivas Vacancy
@@ -162,10 +163,12 @@ extension HomeView: HomeViewProtocol {
 
 extension HomeView: ViewCode {
 	func setupComponents() {
-		addSubview(balanceContainerStack)
-		addSubview(buttonsAddContainerStack)
-		addSubview(budgetContainerStack)
-		addSubview(suggestionContainerStack)
+		addSubview(containerScroll)
+		
+		containerScroll.addSubview(balanceContainerStack)
+		containerScroll.addSubview(buttonsAddContainerStack)
+		containerScroll.addSubview(budgetContainerStack)
+		containerScroll.addSubview(suggestionContainerStack)
 	}
 	
 	func setupConstraints() {
@@ -175,31 +178,36 @@ extension HomeView: ViewCode {
 		let separatorLineHeight: CGFloat = 1
 		
 		NSLayoutConstraint.activate([
-			balanceContainerStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-			balanceContainerStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: screenBorderMargin),
-			balanceContainerStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -screenBorderMargin),
+			containerScroll.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+			containerScroll.leadingAnchor.constraint(equalTo: leadingAnchor),
+			containerScroll.trailingAnchor.constraint(equalTo: trailingAnchor),
+			containerScroll.bottomAnchor.constraint(equalTo: bottomAnchor),
 			
+			balanceContainerStack.topAnchor.constraint(equalTo: containerScroll.topAnchor, constant: 20),
+			balanceContainerStack.leadingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.leadingAnchor, constant: screenBorderMargin),
+			balanceContainerStack.trailingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.trailingAnchor, constant: -screenBorderMargin),
+
 			titleUnderLine.heightAnchor.constraint(equalToConstant: 3),
 			bottomInputLine.heightAnchor.constraint(equalToConstant: separatorLineHeight),
 			separatorLineOne.heightAnchor.constraint(equalToConstant: separatorLineHeight),
 			separatorLineTwo.heightAnchor.constraint(equalToConstant: separatorLineHeight),
-			
+
 			buttonsAddContainerStack.topAnchor.constraint(equalTo: balanceContainerStack.bottomAnchor, constant: verticalPadding),
-			buttonsAddContainerStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: screenBorderMargin),
-			buttonsAddContainerStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -screenBorderMargin),
-			
+			buttonsAddContainerStack.leadingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.leadingAnchor, constant: screenBorderMargin),
+			buttonsAddContainerStack.trailingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.trailingAnchor, constant: -screenBorderMargin),
+
 			budgetContainerStack.topAnchor.constraint(equalTo: buttonsAddContainerStack.bottomAnchor, constant: verticalPadding),
-			budgetContainerStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: screenBorderMargin),
-			budgetContainerStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -screenBorderMargin),
-			
+			budgetContainerStack.leadingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.leadingAnchor, constant: screenBorderMargin),
+			budgetContainerStack.trailingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.trailingAnchor, constant: -screenBorderMargin),
+
 			carCompletionBar.heightAnchor.constraint(equalToConstant: completionBarHeight),
 			tvCompletionBar.heightAnchor.constraint(equalToConstant: completionBarHeight),
 			vacancyCompletionBar.heightAnchor.constraint(equalToConstant: completionBarHeight),
-			
-			
+
 			suggestionContainerStack.topAnchor.constraint(equalTo: budgetContainerStack.bottomAnchor, constant: 36),
-			suggestionContainerStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: screenBorderMargin),
-			suggestionContainerStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -screenBorderMargin),
+			suggestionContainerStack.leadingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.leadingAnchor, constant: screenBorderMargin),
+			suggestionContainerStack.trailingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.trailingAnchor, constant: -screenBorderMargin),
+			suggestionContainerStack.bottomAnchor.constraint(equalTo: containerScroll.bottomAnchor),
 		])
 	}
 	
