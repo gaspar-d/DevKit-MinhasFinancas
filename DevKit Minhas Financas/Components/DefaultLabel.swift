@@ -19,5 +19,6 @@ final class DefaultLabel: UILabel {
 		self.text = text
 		self.textColor  = color
 		self.font = .systemFont(ofSize: fontSize, weight: fontWeight)
+		self.font = .font
 	}
 }

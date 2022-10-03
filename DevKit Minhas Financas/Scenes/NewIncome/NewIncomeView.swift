@@ -1,7 +1,8 @@
 import UIKit
 
 protocol NewIncomeViewProtocol: AnyObject {
-	
+	var getNameText: String? { get }
+	var getValueText: String? { get }
 }
 
 final class NewIncomeView: UIView {
@@ -21,7 +22,13 @@ final class NewIncomeView: UIView {
 }
 
 extension NewIncomeView: NewIncomeViewProtocol {
+	var getNameText: String? {
+		nameTextField.text
+	}
 	
+	var getValueText: String? {
+		valueTextField.text
+	}
 }
 
 extension NewIncomeView: ViewCode {

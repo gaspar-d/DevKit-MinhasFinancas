@@ -3,11 +3,17 @@ import UIKit
 final class NewIncomeController: UIViewController {
 	
 	private let customView: NewIncomeViewProtocol?
+	private let validator: ValidatorProtocol
+	private let alert: AlertsProtocol
 	weak var coordinator: Coordinator?
 	
-	init(customView: NewIncomeViewProtocol = NewIncomeView()) {
+	init(customView: NewIncomeViewProtocol = NewIncomeView(),
+		 validator: ValidatorProtocol = Validator(),
+		 alert: AlertsProtocol = Alerts()
+	) {
 		self.customView = customView
-		
+		self.validator = validator
+		self.alert = alert
 		super.init(nibName: nil, bundle: nil)
 	}
 	
@@ -22,7 +28,6 @@ final class NewIncomeController: UIViewController {
 		setupRightBarButton()
 		setupLeftBarButton()
 	}
-	
 	
 	private func setupView() {
 		self.view = customView as? UIView
@@ -57,10 +62,22 @@ final class NewIncomeController: UIViewController {
 	}
 	
 	@objc func didTapDismissButton() {
-		print("Dismiss button tapped")
+		alert.confirmPopup(title: "Deseja Cancelar",
+						   message: "",
+						   controller: self)
 	}
 	
 	@objc func didTapSaveButton() {
-		print("Save button tapped")
+		guard let name = customView?.getNameText,
+			  let value = customView?.getValueText
+		else {
+			return
+		}
+		
+		if validator.isInputValid(withName: name, withValue: value) {
+			alert.popup(title: "Campo Vazio",
+						message: "Por favor preencher todos os campos",
+						controller: self)
+		}
 	}
 }

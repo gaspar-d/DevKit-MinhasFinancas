@@ -3,10 +3,17 @@ import UIKit
 final class NewExpenseController: UIViewController {
 	
 	private let customView: NewExpenseViewProtocol?
+	private let validator: ValidatorProtocol
+	private let alert: AlertsProtocol
 	weak var coordinator: Coordinator?
 	
-	init(customView: NewExpenseViewProtocol = NewExpenseView()) {
+	init(customView: NewExpenseViewProtocol = NewExpenseView(),
+		 validator: ValidatorProtocol = Validator(),
+		 alert: AlertsProtocol = Alerts()
+	) {
 		self.customView = customView
+		self.validator = validator
+		self.alert = alert
 		super.init(nibName: nil, bundle: nil)
 	}
 	
@@ -21,7 +28,6 @@ final class NewExpenseController: UIViewController {
 		setupNavigationBarAppearance()
 		setupRightBarButton()
 		setupLeftBarButton()
-//		validateInputField()
 	}
 	
 	private func setupView() {
@@ -57,26 +63,20 @@ final class NewExpenseController: UIViewController {
 	}
 	
 	@objc func didTapDismissButton() {
-		print("Dismiss button tapped")
+		alert.confirmPopup(title: "Deseja cancelar", message: "", controller: self)
 	}
 	
 	@objc func didTapSaveButton() {
-		print("Save button tapped")
-		validateInputField()
-	}
-	
-	private func validateInputField() {
 		guard let name = customView?.getNameText,
 			  let value = customView?.getValueText
 		else {
-			print("Campo vazio")
 			return
 		}
 		
-		if name.isEmpty || value.isEmpty {
-			print("Faltou preencher")
-		} else {
-			print("Esse é o \(name) com valor: \(value)")
+		if validator.isInputValid(withName: name, withValue: value) {
+			alert.popup(title: "Campo Vazio",
+						message: "Por favor preencher todos os campos",
+						controller: self)
 		}
 	}
 }

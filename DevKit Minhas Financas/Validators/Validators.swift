@@ -1,7 +1,18 @@
 import UIKit
 
-final class Validators {
+protocol ValidatorProtocol: AnyObject {
+	func isInputValid(withName name: String, withValue value: String) -> Bool
+}
 
-	// TODO: - I really need this??
+final class Validator {}
+
+extension Validator: ValidatorProtocol {
+	
+	public func isInputValid(withName name: String, withValue value: String) -> Bool {
+		if name.isEmpty || value.isEmpty {
+			return true
+		}
+		return false
+	}
 }
 
