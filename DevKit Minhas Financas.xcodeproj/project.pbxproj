@@ -17,10 +17,8 @@
 		EBD1772B28E75D34000C19A6 /* DevKit_Minhas_FinancasUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1772A28E75D34000C19A6 /* DevKit_Minhas_FinancasUITestsLaunchTests.swift */; };
 		EBD1773F28E76472000C19A6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1773E28E76472000C19A6 /* HomeView.swift */; };
 		EBD1774228E76516000C19A6 /* ViewCodeTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1774128E76516000C19A6 /* ViewCodeTemplate.swift */; };
-		EBD1774428E77671000C19A6 /* NewIncomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1774328E77671000C19A6 /* NewIncomeController.swift */; };
-		EBD1774628E777E6000C19A6 /* NewIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1774528E777E6000C19A6 /* NewIncomeView.swift */; };
-		EBD1774828E7788B000C19A6 /* NewExpenseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1774728E7788B000C19A6 /* NewExpenseController.swift */; };
-		EBD1774A28E77893000C19A6 /* NewExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1774928E77893000C19A6 /* NewExpenseView.swift */; };
+		EBD1774428E77671000C19A6 /* ModalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1774328E77671000C19A6 /* ModalController.swift */; };
+		EBD1774628E777E6000C19A6 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1774528E777E6000C19A6 /* ModalView.swift */; };
 		EBD1774D28E79626000C19A6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1774C28E79626000C19A6 /* Coordinator.swift */; };
 		EBD1774F28E79921000C19A6 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1774E28E79921000C19A6 /* HomeCoordinator.swift */; };
 		EBD1775528E7C094000C19A6 /* DefaultStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD1775428E7C094000C19A6 /* DefaultStackView.swift */; };
@@ -80,10 +78,8 @@
 		EBD1772A28E75D34000C19A6 /* DevKit_Minhas_FinancasUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevKit_Minhas_FinancasUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EBD1773E28E76472000C19A6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		EBD1774128E76516000C19A6 /* ViewCodeTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodeTemplate.swift; sourceTree = "<group>"; };
-		EBD1774328E77671000C19A6 /* NewIncomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIncomeController.swift; sourceTree = "<group>"; };
-		EBD1774528E777E6000C19A6 /* NewIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIncomeView.swift; sourceTree = "<group>"; };
-		EBD1774728E7788B000C19A6 /* NewExpenseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExpenseController.swift; sourceTree = "<group>"; };
-		EBD1774928E77893000C19A6 /* NewExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExpenseView.swift; sourceTree = "<group>"; };
+		EBD1774328E77671000C19A6 /* ModalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalController.swift; sourceTree = "<group>"; };
+		EBD1774528E777E6000C19A6 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 		EBD1774C28E79626000C19A6 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		EBD1774E28E79921000C19A6 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		EBD1775428E7C094000C19A6 /* DefaultStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStackView.swift; sourceTree = "<group>"; };
@@ -211,8 +207,7 @@
 		EBD1773928E761F6000C19A6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				EBD1773C28E76245000C19A6 /* NewExpense */,
-				EBD1773B28E7622E000C19A6 /* NewIncome */,
+				EBD1773B28E7622E000C19A6 /* ModalComponent */,
 				EBD1773A28E76226000C19A6 /* Home */,
 			);
 			path = Scenes;
@@ -228,22 +223,13 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		EBD1773B28E7622E000C19A6 /* NewIncome */ = {
+		EBD1773B28E7622E000C19A6 /* ModalComponent */ = {
 			isa = PBXGroup;
 			children = (
-				EBD1774328E77671000C19A6 /* NewIncomeController.swift */,
-				EBD1774528E777E6000C19A6 /* NewIncomeView.swift */,
+				EBD1774328E77671000C19A6 /* ModalController.swift */,
+				EBD1774528E777E6000C19A6 /* ModalView.swift */,
 			);
-			path = NewIncome;
-			sourceTree = "<group>";
-		};
-		EBD1773C28E76245000C19A6 /* NewExpense */ = {
-			isa = PBXGroup;
-			children = (
-				EBD1774728E7788B000C19A6 /* NewExpenseController.swift */,
-				EBD1774928E77893000C19A6 /* NewExpenseView.swift */,
-			);
-			path = NewExpense;
+			path = ModalComponent;
 			sourceTree = "<group>";
 		};
 		EBD1773D28E762C6000C19A6 /* Coordinator */ = {
@@ -455,7 +441,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBD1774628E777E6000C19A6 /* NewIncomeView.swift in Sources */,
+				EBD1774628E777E6000C19A6 /* ModalView.swift in Sources */,
 				EBD1770C28E75D32000C19A6 /* HomeController.swift in Sources */,
 				EBD1775B28E8DCBF000C19A6 /* ColorAssets.swift in Sources */,
 				EBD1775728E7F1A8000C19A6 /* DefaultButton.swift in Sources */,
@@ -468,12 +454,10 @@
 				EBD1776628E97362000C19A6 /* Validators.swift in Sources */,
 				EBD1776328E95C77000C19A6 /* DefaultLabel.swift in Sources */,
 				EBD1776B28EA4A31000C19A6 /* SystemTime.swift in Sources */,
-				EBD1774828E7788B000C19A6 /* NewExpenseController.swift in Sources */,
 				EBD1773F28E76472000C19A6 /* HomeView.swift in Sources */,
-				EBD1774428E77671000C19A6 /* NewIncomeController.swift in Sources */,
+				EBD1774428E77671000C19A6 /* ModalController.swift in Sources */,
 				EBD1770828E75D32000C19A6 /* AppDelegate.swift in Sources */,
 				EBD1770A28E75D32000C19A6 /* SceneDelegate.swift in Sources */,
-				EBD1774A28E77893000C19A6 /* NewExpenseView.swift in Sources */,
 				EBD1775D28E8FC68000C19A6 /* DefaultTextField.swift in Sources */,
 				EBD1776F28EA89E6000C19A6 /* Alerts.swift in Sources */,
 				EBD1774F28E79921000C19A6 /* HomeCoordinator.swift in Sources */,

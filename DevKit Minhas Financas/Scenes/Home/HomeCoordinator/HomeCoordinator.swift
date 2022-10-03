@@ -26,7 +26,7 @@ extension HomeCoordinator: HomeCoordinatorProtocol {
 //		let navBar = UINavigationController(rootViewController: expenseVC)
 //		expenseVC.coordinator = self
 		
-		let incomeVC = NewIncomeController()
+		let incomeVC = ModalController()
 		incomeVC.coordinator = self
 		incomeVC.chooseWhichViewAppear() // AQUI <--------------
 		let navBar = UINavigationController(rootViewController: incomeVC)
@@ -34,7 +34,7 @@ extension HomeCoordinator: HomeCoordinatorProtocol {
 	}
 	
 	func navigateToIncomeView() {
-		let incomeVC = NewIncomeController()
+		let incomeVC = ModalController()
 		incomeVC.coordinator = self
 		let navBar = UINavigationController(rootViewController: incomeVC)
 		navigation.present(navBar, animated: true)

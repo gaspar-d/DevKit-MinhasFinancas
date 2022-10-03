@@ -1,6 +1,6 @@
 import UIKit
 
-protocol NewIncomeViewProtocol: AnyObject {
+protocol ModalViewProtocol: AnyObject {
 	var getNameText: String? { get }
 	var getValueText: String? { get }
 	func setPickerDelegateAndSource(delegate: UIPickerViewDelegate, datasource: UIPickerViewDataSource)
@@ -9,7 +9,7 @@ protocol NewIncomeViewProtocol: AnyObject {
 	func isNewExpenseView()
 }
 
-final class NewIncomeView: UIView {
+final class ModalView: UIView {
 	
 	// MARK: - Components
 	
@@ -64,7 +64,7 @@ final class NewIncomeView: UIView {
 
 // MARK: -  extensions
 
-extension NewIncomeView: NewIncomeViewProtocol {
+extension ModalView: ModalViewProtocol {
 	var getNameText: String? {
 		nameTextField.text
 	}
@@ -93,7 +93,7 @@ extension NewIncomeView: NewIncomeViewProtocol {
 	}
 }
 
-extension NewIncomeView: ViewCode {
+extension ModalView: ViewCode {
 	
 	func setupComponents() {
 		addSubview(nameTextField)

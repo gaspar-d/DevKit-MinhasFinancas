@@ -1,14 +1,14 @@
 import UIKit
 
-final class NewIncomeController: UIViewController {
+final class ModalController: UIViewController {
 
 	let categoryItems = ["", "Novo Carro", "TV", "Férias nas Maldivas", "Nenhum"]
-	private let customView: NewIncomeViewProtocol?
+	private let customView: ModalViewProtocol?
 	private let validator: ValidatorProtocol
 	private let alert: AlertsProtocol
 	weak var coordinator: Coordinator?
 	
-	init(customView: NewIncomeViewProtocol = NewIncomeView(),
+	init(customView: ModalViewProtocol = ModalView(),
 		 validator: ValidatorProtocol = Validator(),
 		 alert: AlertsProtocol = Alerts()
 	) {
@@ -98,7 +98,7 @@ final class NewIncomeController: UIViewController {
 	}
 }
 
-extension NewIncomeController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension ModalController: UIPickerViewDelegate, UIPickerViewDataSource {
 	func numberOfComponents(in pickerView: UIPickerView) -> Int {
 		return 1
 	}
