@@ -5,6 +5,7 @@ protocol NewIncomeViewProtocol: AnyObject {
 	var getValueText: String? { get }
 	func setPickerDelegateAndSource(delegate: UIPickerViewDelegate, datasource: UIPickerViewDataSource)
 	func setCategory(item: String)
+	func cleanFields()
 }
 
 final class NewIncomeView: UIView {
@@ -30,7 +31,6 @@ final class NewIncomeView: UIView {
 		
 		let toolBar = UIToolbar()
 		toolBar.translatesAutoresizingMaskIntoConstraints = false
-//		toolBar.isTranslucent = true
 		toolBar.tintColor = .ColorAssets.customBlueLine
 		toolBar.sizeToFit()
 		toolBar.setItems([doneButton, spaceButton, cancelButton], animated: false)
@@ -79,6 +79,12 @@ extension NewIncomeView: NewIncomeViewProtocol {
 	
 	func setCategory(item: String) {
 		categoryTextField.text = item
+	}
+	
+	func cleanFields() {
+		nameTextField.text = ""
+		valueTextField.text = ""
+		categoryTextField.text = ""
 	}
 }
 

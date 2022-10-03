@@ -3,6 +3,7 @@ import UIKit
 protocol NewExpenseViewProtocol: AnyObject {
 	var getNameText: String? { get }
 	var getValueText: String? { get }
+	func cleanFields()
 }
 
 final class NewExpenseView: UIView {
@@ -31,6 +32,11 @@ extension NewExpenseView: NewExpenseViewProtocol {
 	
 	var getValueText: String? {
 		return valueTextField.text
+	}
+	
+	func cleanFields() {
+		nameTextField.text = ""
+		valueTextField.text = ""
 	}
 }
 

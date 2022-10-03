@@ -19,7 +19,7 @@ final class HomeView: UIView {
 	}()
 	
 	private lazy var myBalanceLabel = DefaultLabel(withText: "Meu Saldo", withColor: .ColorAssets.secondaryColor)
-	private lazy var inputTextField = DefaultTextField(withNumericPlaceholder: "R$ 0,00")
+	private lazy var inputTextField = DefaultTextField(withNumericValue: "R$ 1.000,00")
 	private lazy var bottomInputLine = SeparatorLine(withColor: .ColorAssets.customBlueLine)
 	private lazy var lastTransactionLabel = DefaultLabel(withText: "Última atualização", withColor: .ColorAssets.secondaryColor, withFontWeight: .regular)
 	private lazy var lastTransactionTime = DefaultLabel(withText: "09:41", withColor: .ColorAssets.secondaryColor, withFontWeight: .regular)

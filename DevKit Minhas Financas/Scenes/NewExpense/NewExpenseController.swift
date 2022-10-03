@@ -77,6 +77,11 @@ final class NewExpenseController: UIViewController {
 			alert.popup(title: "Campo Vazio",
 						message: "Por favor preencher todos os campos",
 						controller: self)
+		} else {
+			alert.popup(title: "Salvo",
+						message: "",
+						controller: self)
+			customView?.cleanFields()
 		}
 	}
 }

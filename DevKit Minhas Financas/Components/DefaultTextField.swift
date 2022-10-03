@@ -2,9 +2,9 @@ import UIKit
 
 final class DefaultTextField: UITextField {
 	
-	init(withNumericPlaceholder placeholder: String) {
+	init(withNumericValue text: String) {
 		super.init(frame: .zero)
-		initMainTextField(with: placeholder)
+		initMainTextField(with: text)
 	}
 	
 	init(withPlaceholder placeholder: String, keyboardType: UIKeyboardType = .default) {
@@ -16,9 +16,9 @@ final class DefaultTextField: UITextField {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	private func initMainTextField(with placeholder: String) {
+	private func initMainTextField(with text: String) {
 		self.translatesAutoresizingMaskIntoConstraints = false
-		self.placeholder = placeholder
+		self.text = text
 		self.textColor  = .ColorAssets.primaryColor
 		self.font = .systemFont(ofSize: 32, weight: .bold)
 		self.borderStyle = .roundedRect

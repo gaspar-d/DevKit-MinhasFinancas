@@ -2,7 +2,7 @@ import UIKit
 
 final class NewIncomeController: UIViewController {
 
-	let categoryItems = ["Novo Carro", "TV", "Férias nas Maldivas", "Nenhum"]
+	let categoryItems = ["", "Novo Carro", "TV", "Férias nas Maldivas", "Nenhum"]
 	private let customView: NewIncomeViewProtocol?
 	private let validator: ValidatorProtocol
 	private let alert: AlertsProtocol
@@ -82,6 +82,11 @@ final class NewIncomeController: UIViewController {
 			alert.popup(title: "Campo Vazio",
 						message: "Por favor preencher todos os campos",
 						controller: self)
+		} else {
+			alert.popup(title: "Salvo",
+						message: "",
+						controller: self)
+			customView?.cleanFields()
 		}
 	}
 }
