@@ -12,7 +12,7 @@ extension Alerts: AlertsProtocol {
 	func popup(title: String, message: String, controller: UIViewController) {
 		let alert = UIAlertController(title: title,
 									  message: message,
-									  preferredStyle: .alert)
+									  preferredStyle: .actionSheet)
 		
 		let okAction = UIAlertAction(title: "Ok", style: .default)
 		alert.addAction(okAction)
@@ -24,7 +24,7 @@ extension Alerts: AlertsProtocol {
 		
 		let alert = UIAlertController(title: title,
 									  message: message,
-									  preferredStyle: .alert)
+									  preferredStyle: .actionSheet)
 		
 		let yesAction = UIAlertAction(title: "sim", style: .destructive) {_ in 
 			controller.dismiss(animated: true)
