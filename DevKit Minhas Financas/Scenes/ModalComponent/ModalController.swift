@@ -2,6 +2,8 @@ import UIKit
 
 final class ModalController: UIViewController {
 
+	// MARK: -  Variables
+	
 	let categoryItems = ["", "Novo Carro", "TV", "Férias nas Maldivas", "Nenhum"]
 	private let customView: ModalViewProtocol?
 	private let validator: ValidatorProtocol
@@ -29,7 +31,12 @@ final class ModalController: UIViewController {
 		setupRightBarButton()
 		setupLeftBarButton()
 		setupPickerDelegateAndDataSource()
+		setPresentControllerDelegate()
+		disableModalDragDownDismiss()
 	}
+	
+	
+	// MARK: - Methods
 	
 	private func setupView() {
 		self.view = customView as? UIView
@@ -37,6 +44,14 @@ final class ModalController: UIViewController {
 	
 	public func chooseWhichViewAppear() {
 		customView?.isNewExpenseView()
+	}
+	
+	private func setPresentControllerDelegate() {
+		navigationController?.presentationController?.delegate = self
+	}
+	
+	private func disableModalDragDownDismiss() {
+		self.isModalInPresentation = true
 	}
 	
 	private func setupPickerDelegateAndDataSource() {
@@ -73,7 +88,7 @@ final class ModalController: UIViewController {
 	}
 	
 	@objc func didTapDismissButton() {
-		alert.confirmPopup(title: "Deseja Cancelar",
+		alert.confirmPopup(title: "Deseja Cancelar?",
 						   message: "",
 						   controller: self)
 	}
@@ -98,6 +113,9 @@ final class ModalController: UIViewController {
 	}
 }
 
+
+// MARK: -  Extensions
+
 extension ModalController: UIPickerViewDelegate, UIPickerViewDataSource {
 	func numberOfComponents(in pickerView: UIPickerView) -> Int {
 		return 1
@@ -113,5 +131,14 @@ extension ModalController: UIPickerViewDelegate, UIPickerViewDataSource {
 	
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 		customView?.setCategory(item: categoryItems[row])
+	}
+}
+
+extension ModalController: UIAdaptivePresentationControllerDelegate {
+	
+	func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+			alert.confirmPopup(title: "Deseja Cancelar?",
+							   message: "",
+							   controller: self)
 	}
 }

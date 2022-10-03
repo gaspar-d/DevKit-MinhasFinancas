@@ -21,6 +21,7 @@ extension Alerts: AlertsProtocol {
 	}
 	
 	func confirmPopup(title: String, message: String, controller: UIViewController) {
+		
 		let alert = UIAlertController(title: title,
 									  message: message,
 									  preferredStyle: .alert)
@@ -28,6 +29,7 @@ extension Alerts: AlertsProtocol {
 		let yesAction = UIAlertAction(title: "sim", style: .destructive) {_ in 
 			controller.dismiss(animated: true)
 		}
+		
 		let noAction = UIAlertAction(title: "não", style: .cancel)
 		
 		alert.addAction(yesAction)

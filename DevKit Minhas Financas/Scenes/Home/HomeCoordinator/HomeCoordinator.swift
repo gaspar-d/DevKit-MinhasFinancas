@@ -22,14 +22,10 @@ final class HomeCoordinator: Coordinator {
 extension HomeCoordinator: HomeCoordinatorProtocol {
 	
 	func navigateToExpenseView() {
-//		let expenseVC = NewExpenseController()
-//		let navBar = UINavigationController(rootViewController: expenseVC)
-//		expenseVC.coordinator = self
-		
-		let incomeVC = ModalController()
-		incomeVC.coordinator = self
-		incomeVC.chooseWhichViewAppear() // AQUI <--------------
-		let navBar = UINavigationController(rootViewController: incomeVC)
+		let expenseVC = ModalController()
+		expenseVC.coordinator = self
+		expenseVC.chooseWhichViewAppear()
+		let navBar = UINavigationController(rootViewController: expenseVC)
 		navigation.present(navBar, animated: true)
 	}
 	
