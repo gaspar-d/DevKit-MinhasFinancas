@@ -6,6 +6,7 @@ protocol NewIncomeViewProtocol: AnyObject {
 	func setPickerDelegateAndSource(delegate: UIPickerViewDelegate, datasource: UIPickerViewDataSource)
 	func setCategory(item: String)
 	func cleanFields()
+	func isNewExpenseView()
 }
 
 final class NewIncomeView: UIView {
@@ -85,6 +86,10 @@ extension NewIncomeView: NewIncomeViewProtocol {
 		nameTextField.text = ""
 		valueTextField.text = ""
 		categoryTextField.text = ""
+	}
+	
+	func isNewExpenseView() {
+		categoryTextField.isHidden = true
 	}
 }
 

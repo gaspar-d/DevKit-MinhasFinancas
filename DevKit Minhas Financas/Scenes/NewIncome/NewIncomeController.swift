@@ -28,13 +28,20 @@ final class NewIncomeController: UIViewController {
 		setupNavigationBarAppearance()
 		setupRightBarButton()
 		setupLeftBarButton()
-		
-		customView?.setPickerDelegateAndSource(delegate: self,
-											   datasource: self)
+		setupPickerDelegateAndDataSource()
 	}
 	
 	private func setupView() {
 		self.view = customView as? UIView
+	}
+	
+	public func chooseWhichViewAppear() {
+		customView?.isNewExpenseView()
+	}
+	
+	private func setupPickerDelegateAndDataSource() {
+		customView?.setPickerDelegateAndSource(delegate: self,
+											   datasource: self)
 	}
 	
 	private func setupNavigationBarAppearance() {

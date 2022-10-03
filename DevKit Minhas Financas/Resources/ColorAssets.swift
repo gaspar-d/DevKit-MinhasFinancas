@@ -3,9 +3,9 @@ import UIKit
 extension UIColor {
 	
 	enum ColorAssets {
-		static var textBlueAccentColor: UIColor { return UIColor.init(red: 77/255, green: 92/255, blue: 228/255, alpha: 1)} // blue
-		static var numberBlueAccentColor: UIColor { return UIColor.init(red: 77/255, green: 92/255, blue: 228/255, alpha: 0.7)} // blue
-		static var bgAccentColor: UIColor { return UIColor.init(red: 77/255, green: 92/255, blue: 228/255, alpha: 0.1)} // light blue
+		static var textBlueAccentColor: UIColor { return UIColor.init(red: 77/255, green: 92/255, blue: 228/255, alpha: 1) }
+		static var numberBlueAccentColor: UIColor { return UIColor.init(red: 77/255, green: 92/255, blue: 228/255, alpha: 0.7) }
+		static var bgAccentColor: UIColor { return UIColor.init(red: 77/255, green: 92/255, blue: 228/255, alpha: 0.1) }
 		static var customBlueLine: UIColor { return .systemIndigo }
 		static var customRed: UIColor { return UIColor(red: 194/255, green: 76/255, blue: 67/255, alpha: 1) }
 		static var customGreen: UIColor { return UIColor(red: 90/255, green: 173/255, blue: 51/255, alpha: 1) }
