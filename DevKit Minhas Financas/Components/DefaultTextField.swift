@@ -34,5 +34,3 @@ final class DefaultTextField: UITextField {
 		self.keyboardType = keyboardType
 	}
 }
-
-
