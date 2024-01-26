@@ -14,30 +14,59 @@ final class HomeView: UIView {
 		let view = UIScrollView(frame: .zero)
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.showsVerticalScrollIndicator = false
-
+		
 		return view
 	}()
 	
-	private lazy var myBalanceLabel = DefaultLabel(withText: "Meu Saldo", withColor: .ColorAssets.secondaryColor)
-	private lazy var inputTextField = DefaultTextField(withNumericValue: "R$ 1.000,00")
-	private lazy var bottomInputLine = SeparatorLine(withColor: .ColorAssets.customBlueLine)
-	private lazy var lastTransactionLabel = DefaultLabel(withText: "Última atualização", withColor: .ColorAssets.secondaryColor, withFontWeight: .regular)
-	private lazy var lastTransactionTime = DefaultLabel(withText: "09:41", withColor: .ColorAssets.secondaryColor, withFontWeight: .regular)
-	private lazy var balanceBottonContainer = DefaultStackView(basicStack: [lastTransactionLabel, lastTransactionTime])
-	private lazy var balanceContainerStack = DefaultStackView(defaultContainer:
-																[myBalanceLabel,
-																 inputTextField,
-																 bottomInputLine,
-																 balanceBottonContainer])
+	private lazy var myBalanceLabel = DefaultLabel(
+		withText: "Meu Saldo",
+		withColor: .ColorAssets.secondaryColor
+	)
+	
+	private lazy var inputTextField = DefaultTextField(
+		withNumericValue: "R$ 1.000,00"
+	)
+	
+	private lazy var bottomInputLine = SeparatorLine(
+		withColor: .ColorAssets.customBlueLine
+	)
+	
+	private lazy var lastTransactionLabel = DefaultLabel(
+		withText: "Última atualização",
+		withColor: .ColorAssets.secondaryColor,
+		withFontWeight: .regular
+	)
+	
+	private lazy var lastTransactionTime = DefaultLabel(
+		withText: "09:41",
+		withColor: .ColorAssets.secondaryColor,
+		withFontWeight: .regular
+	)
+	
+	private lazy var balanceBottonContainer = DefaultStackView(
+		basicStack: [lastTransactionLabel,
+					 lastTransactionTime]
+	)
+	
+	private lazy var balanceContainerStack = DefaultStackView(
+		defaultContainer:
+			[myBalanceLabel,
+			 inputTextField,
+			 bottomInputLine,
+			 balanceBottonContainer]
+	)
 	
 	
 	// MARK: - Button Components
 	
 	private lazy var addIncomeButton = DefaultButton(withTitle: "NOVA RECEITA", withIcon: "plus", withColor: .ColorAssets.customGreen)
 	private lazy var addExpenseButton = DefaultButton(withTitle: "NOVA DESPESA", withIcon: "minus", withColor: .ColorAssets.customRed)
-	private lazy var buttonsAddContainerStack = DefaultStackView(buttonComponents:
-																	[addIncomeButton,
-																	 addExpenseButton])
+	private lazy var buttonsAddContainerStack = DefaultStackView(
+		buttonComponents: [
+			addIncomeButton,
+			addExpenseButton
+		]
+	)
 	
 	
 	// MARK: - Budget Components -> Title Block
@@ -56,10 +85,13 @@ final class HomeView: UIView {
 	private lazy var totalValueLabel = DefaultLabel(withText: "R$ 80.000,00", withColor: .ColorAssets.numberBlueAccentColor)
 	private lazy var separatorLineOne = SeparatorLine(withColor: .ColorAssets.bgColor)
 	private lazy var newCarBottonContainer = DefaultStackView(basicStack: [currentValueLabel, totalValueLabel])
-	private lazy var newCarContainerStack = DefaultStackView(insideContainer:
-																[newCarLabel,
-																 carCompletionBar,
-																 newCarBottonContainer])
+	private lazy var newCarContainerStack = DefaultStackView(
+		insideContainer: [
+			newCarLabel,
+			carCompletionBar,
+			newCarBottonContainer
+		]
+	)
 	
 	
 	// MARK: - TV Block
@@ -83,18 +115,22 @@ final class HomeView: UIView {
 	private lazy var vacancyCurrentValueLabel = DefaultLabel(withText: "R$ 1,50", withColor: .ColorAssets.customRed)
 	private lazy var vacancyTotalValueLabel = DefaultLabel(withText: "R$ 200.000,00", withColor: .ColorAssets.numberBlueAccentColor)
 	private lazy var vacancyBottonContainer = DefaultStackView(basicStack: [vacancyCurrentValueLabel, vacancyTotalValueLabel])
-	private lazy var vacancyContainerStack = DefaultStackView(insideContainer:
-																[vacancyLabel,
-																 vacancyCompletionBar,
-																 vacancyBottonContainer])
-	private lazy var budgetContainerStack = DefaultStackView(defaultContainer:
-																[budgetTitleContainer,
-																 titleUnderLine,
-																 newCarContainerStack,
-																 separatorLineOne,
-																 newTvContainerStack,
-																 separatorLineTwo,
-																 vacancyContainerStack])
+	private lazy var vacancyContainerStack = DefaultStackView(
+		insideContainer:
+			[vacancyLabel,
+			 vacancyCompletionBar,
+			 vacancyBottonContainer]
+	)
+	private lazy var budgetContainerStack = DefaultStackView(
+		defaultContainer:
+			[budgetTitleContainer,
+			 titleUnderLine,
+			 newCarContainerStack,
+			 separatorLineOne,
+			 newTvContainerStack,
+			 separatorLineTwo,
+			 vacancyContainerStack]
+	)
 	
 	
 	// MARK: - Suggestion Block
@@ -186,24 +222,24 @@ extension HomeView: ViewCode {
 			balanceContainerStack.topAnchor.constraint(equalTo: containerScroll.topAnchor, constant: 20),
 			balanceContainerStack.leadingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.leadingAnchor, constant: screenBorderMargin),
 			balanceContainerStack.trailingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.trailingAnchor, constant: -screenBorderMargin),
-
+			
 			titleUnderLine.heightAnchor.constraint(equalToConstant: 3),
 			bottomInputLine.heightAnchor.constraint(equalToConstant: separatorLineHeight),
 			separatorLineOne.heightAnchor.constraint(equalToConstant: separatorLineHeight),
 			separatorLineTwo.heightAnchor.constraint(equalToConstant: separatorLineHeight),
-
+			
 			buttonsAddContainerStack.topAnchor.constraint(equalTo: balanceContainerStack.bottomAnchor, constant: verticalPadding),
 			buttonsAddContainerStack.leadingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.leadingAnchor, constant: screenBorderMargin),
 			buttonsAddContainerStack.trailingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.trailingAnchor, constant: -screenBorderMargin),
-
+			
 			budgetContainerStack.topAnchor.constraint(equalTo: buttonsAddContainerStack.bottomAnchor, constant: verticalPadding),
 			budgetContainerStack.leadingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.leadingAnchor, constant: screenBorderMargin),
 			budgetContainerStack.trailingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.trailingAnchor, constant: -screenBorderMargin),
-
+			
 			carCompletionBar.heightAnchor.constraint(equalToConstant: completionBarHeight),
 			tvCompletionBar.heightAnchor.constraint(equalToConstant: completionBarHeight),
 			vacancyCompletionBar.heightAnchor.constraint(equalToConstant: completionBarHeight),
-
+			
 			suggestionContainerStack.topAnchor.constraint(equalTo: budgetContainerStack.bottomAnchor, constant: 36),
 			suggestionContainerStack.leadingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.leadingAnchor, constant: screenBorderMargin),
 			suggestionContainerStack.trailingAnchor.constraint(equalTo: containerScroll.frameLayoutGuide.trailingAnchor, constant: -screenBorderMargin),

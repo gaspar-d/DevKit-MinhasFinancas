@@ -35,7 +35,6 @@ final class ModalController: UIViewController {
 		disableModalDragDownDismiss()
 	}
 	
-	
 	// MARK: - Methods
 	
 	private func setupView() {
@@ -74,17 +73,19 @@ final class ModalController: UIViewController {
 	}
 	
 	private func setupRightBarButton() {
-		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Salvar",
-															style: .plain,
-															target: self,
-															action: #selector(didTapSaveButton))
+		navigationItem.rightBarButtonItem = UIBarButtonItem(
+			title: "Salvar",
+			style: .plain,
+			target: self,
+			action: #selector(didTapSaveButton))
 	}
 	
 	private func setupLeftBarButton() {
-		navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.down"),
-														   style: .plain,
-														   target: self,
-														   action: #selector(didTapDismissButton))
+		navigationItem.leftBarButtonItem = UIBarButtonItem(
+			image: UIImage(systemName: "chevron.down"),
+			style: .plain,
+			target: self,
+			action: #selector(didTapDismissButton))
 	}
 	
 	@objc func didTapDismissButton() {

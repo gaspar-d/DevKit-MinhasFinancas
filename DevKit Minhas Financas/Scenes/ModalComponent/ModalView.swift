@@ -3,7 +3,8 @@ import UIKit
 protocol ModalViewProtocol: AnyObject {
 	var getNameText: String? { get }
 	var getValueText: String? { get }
-	func setPickerDelegateAndSource(delegate: UIPickerViewDelegate, datasource: UIPickerViewDataSource)
+	func setPickerDelegateAndSource(delegate: UIPickerViewDelegate,
+									datasource: UIPickerViewDataSource)
 	func setCategory(item: String)
 	func cleanFields()
 	func isNewExpenseView()
@@ -73,7 +74,8 @@ extension ModalView: ModalViewProtocol {
 		valueTextField.text
 	}
 	
-	func setPickerDelegateAndSource(delegate: UIPickerViewDelegate, datasource: UIPickerViewDataSource) {
+	func setPickerDelegateAndSource(delegate: UIPickerViewDelegate,
+									datasource: UIPickerViewDataSource) {
 		categoryPicker.delegate = delegate
 		categoryPicker.dataSource = datasource
 	}

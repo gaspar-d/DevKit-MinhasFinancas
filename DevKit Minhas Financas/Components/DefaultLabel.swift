@@ -15,7 +15,10 @@ final class DefaultLabel: UILabel {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	private func createLabel(text: String, color: UIColor, fontSize: CGFloat, fontWeight: UIFont.Weight) {
+	private func createLabel(text: String,
+							 color: UIColor,
+							 fontSize: CGFloat,
+							 fontWeight: UIFont.Weight) {
 		self.text = text
 		self.textColor  = color
 		self.font = .systemFont(ofSize: fontSize, weight: fontWeight)

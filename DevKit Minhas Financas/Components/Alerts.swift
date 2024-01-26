@@ -10,9 +10,10 @@ final class Alerts {}
 extension Alerts: AlertsProtocol {
 	
 	func popup(title: String, message: String, controller: UIViewController) {
-		let alert = UIAlertController(title: title,
-									  message: message,
-									  preferredStyle: .actionSheet)
+		let alert = UIAlertController(
+			title: title,
+			message: message,
+			preferredStyle: .actionSheet)
 		
 		let okAction = UIAlertAction(title: "Ok", style: .default)
 		alert.addAction(okAction)
@@ -22,11 +23,12 @@ extension Alerts: AlertsProtocol {
 	
 	func confirmPopup(title: String, message: String, controller: UIViewController) {
 		
-		let alert = UIAlertController(title: title,
-									  message: message,
-									  preferredStyle: .actionSheet)
+		let alert = UIAlertController(
+			title: title,
+			message: message,
+			preferredStyle: .actionSheet)
 		
-		let yesAction = UIAlertAction(title: "sim", style: .destructive) {_ in 
+		let yesAction = UIAlertAction(title: "sim", style: .destructive) {_ in
 			controller.dismiss(animated: true)
 		}
 		
